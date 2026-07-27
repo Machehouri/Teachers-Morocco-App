@@ -1,0 +1,7 @@
+Django
+djangorestframework
+environs
+djangorestframework-simplejwt
+django-cors-headers
+pillow
+resend
