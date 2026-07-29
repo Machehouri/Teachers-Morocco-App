@@ -260,7 +260,7 @@ class NotificationViewSet(viewsets.ModelViewSet):
 
         return Notification.objects.filter(
             user=self.request.user
-        ).order_by("-created_at")[:30]
+        ).order_by("-created_at")
     @action(detail=True, methods=['patch'])
     def read(self, request, pk=None):
 
@@ -268,6 +268,9 @@ class NotificationViewSet(viewsets.ModelViewSet):
 
         notification.is_read = True
         notification.save()
+
+        return Response({"message": "Notification marked as read"})
+
     @action(detail=False, methods=['get'])
     def unread_count(self, request):
 
@@ -279,6 +282,4 @@ class NotificationViewSet(viewsets.ModelViewSet):
         return Response({
             "count": count
         })
-
-        return Response({"message": "Notification marked as read"})
     

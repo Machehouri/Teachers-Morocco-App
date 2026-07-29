@@ -38,6 +38,16 @@ frontend/.env.local
 *.swo
 .DS_Store
 
+# Agent config (local dev only)
+.agents/
+.claude/
+skills-lock.json
+
+# Playwright test artifacts
+frontend/playwright-report/
+frontend/test-results/
+frontend/.auth/
+
 # Logs
 *.log
 logs/
