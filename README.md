@@ -15,10 +15,12 @@ A full-stack platform connecting students with private teachers across Morocco �
 
 ## Tech Stack
 
-- **Frontend:** React 18, Tailwind CSS, React Router, React Hot Toast
-- **Backend:** Django 4.2, Django REST Framework, SimpleJWT
+- **Frontend:** React 19, Tailwind CSS, React Router, React Hot Toast
+- **Backend:** Django 6.0, Django REST Framework, SimpleJWT
 - **Database:** SQLite (dev) / PostgreSQL (prod)
 - **Email:** Resend API
+- **Testing:** Jest + React Testing Library (frontend), Django TestCase (backend), Playwright (E2E)
+- **CI:** GitHub Actions
 
 ## Getting Started
 
@@ -97,6 +99,48 @@ See `.env.example` for all required variables.
 | GET | `/notifications/` | List notifications |
 | PATCH | `/notifications/{id}/read/` | Mark notification read |
 | GET | `/notifications/unread_count/` | Get unread count |
+
+## Testing
+
+### Backend Tests (117 tests)
+
+```bash
+cd project_root
+# requires SECRET_KEY in environment
+$env:SECRET_KEY = "your-secret-key"  # Windows PowerShell
+export SECRET_KEY="your-secret-key"   # Linux/macOS
+python manage.py test api
+```
+
+### Frontend Tests (18 tests)
+
+```bash
+cd frontend
+npm test
+```
+
+### E2E Tests (Playwright)
+
+```bash
+cd frontend
+npx playwright install chromium
+npx playwright test
+```
+
+### Run All Tests
+
+On every push, GitHub Actions automatically runs all three test suites.
+
+### QA Strategy
+
+See `docs/qa-strategy.md` for the full testing strategy — risk matrix, test pyramid, quality gates, KPIs, and timeline.
+
+## CI/CD
+
+GitHub Actions workflow at `.github/workflows/tests.yml` runs on every push and pull request:
+- **Backend** — Django tests with Python 3.11
+- **Frontend** — Jest + RTL tests with Node 18
+- **E2E** — Playwright tests against Chromium
 
 ## License
 
